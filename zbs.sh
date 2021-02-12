@@ -1,5 +1,6 @@
 #!/bin/bash
-cat <<EOF
-    aaa
-    bbb
-EOF
+for ((i=1;i<=100;++i))
+do
+    echo "hello"$i
+    sleep 1s
+done >test

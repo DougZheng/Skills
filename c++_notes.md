@@ -150,5 +150,4 @@ void g(T &&x) {
     f(std::forward<T>(x));
 }
 g(42);
-
 ```

@@ -346,6 +346,18 @@ command1 | command2 [ | commandN ...]
 
 ## Linux 常用命令
 
+### 快捷参考
+
+**man** [-k] term **(manual)** ：查看 `term` 的使用，`-k` 显示匹配关键字的简要描述。
+
+**help** [-d] term：查看 shell 内置命令的使用，`-d` 简要显示用途。
+
+**type** term ：查看命令类型，可执行文件、shell 内置命令或别名。
+
+term **--help** ：查看命令的具体用法。
+
+### 快捷命令
+
 **Tab** ：自动补全参数。
 
 **$\uparrow\downarrow$** ：切换上/下次命令。
@@ -376,16 +388,91 @@ command1 | command2 [ | commandN ...]
 
 **!n** ：执行编号为 n 的命令。
 
-**cd ~** ：进入 home 目录，`~/.bashrc` 访问 home 目录文件。
-
-**cd -** ：进入上一次的目录。
-
-**dirs [-v] [-c]** ：显示目录栈，栈顶是当前目录，`-v` 按行显示并带编号，`-c` 清空栈。
-
-**pushd [dir | +N] (push directory)** ：`dir` 压入一个目录，`+N` 表示让编号为 N 的目录成为栈顶（切换到该目录）。
-
-**popd [+N] (pop directory)** ：`+N` 表示弹出编号为 N 的目录。
-
 **ctrl + a, #, enter** ：注释该行命令并执行，可以在历史命令找到。
 
-**echo** ：
+### 目录切换
+
+**cd** [dir] **(change directory)**：切换到 `dir` ，`~` 为 home 目录（`~/.bashrc` 访问 home 目录下文件），`-` 为上一次目录。
+
+**dirs** [-v] [-c] **(directories)**：显示目录栈，栈顶是当前目录，`-v` 按行显示并带编号，`-c` 清空栈。
+
+**pushd** [dir | +N] **(push directory)** ：`dir` 压入一个目录，`+N` 表示让编号为 N 的目录成为栈顶（切换到该目录）。
+
+**popd** [+N] **(pop directory)** ：`+N` 表示弹出编号为 N 的目录。
+
+### 进程管理
+
+**ctrl + z** ：将当前进程放到后台并挂起。
+
+**ctrl + c** ：中止前台进程。
+
+**ctrl + d** ：EOF ，文件终止符。
+
+**\&** ：加在命令最后，可以将该命令放到后台执行。
+
+**jobs** [-l] ：查看后台进程，`-l` 显示 pid 。
+
+**fg** n **(foreground)** ：将 jobid 为 n 的进程调到前台执行。
+
+**bg** n **(background)** ：让 jobid 为 n 的进程在后台执行。
+
+**kill** [-9 | -19 | -l] [%n | pid] ：正常停止一个进程，`-9` 强制杀死，`-19` 挂起进程，`-l` 查看支持的信号，`%n` 指代 jobid 为 n 的进程。
+
+### 文件管理
+
+**ls** [-a] [-l] [dir] **(list)** ：列出 `dir` 目录下的所有文件，默认为 . ，`-a` 列出包括隐藏文件和 . 及 .. ，`-l` 以长格式列出具体信息。
+
+**pwd (print working directory)** ：打印当前目录路径。
+
+**mkdir** [-p] [-v] dir **(make directory)** ：创建目录 `dir` ，`-p` 自动创建所需父目录，`-v` 打印创建信息。
+
+**rmdir** [-p] [-v] dir **(remove directory)** ：移除空目录 `dir` ，`-p` 自动移除空的父目录，`-v` 打印移除信息。
+
+**cp** [-i] [-R] [-f] [-a] source dest **(copy)** ：复制文件 `source` 到 `dest`，`-i` 为覆盖提示，`-R` 递归复制，`-f` 强制，`-a` 即 `-dpr` 保留链接、文件属性，并递归复制目录下所有内容。
+
+**cp** source... directory ：多源复制到目录 `directory` 下。
+
+**mv** [-i] [-f] source dest **(move)** ：移动文件（可用于改名），`-i` 为覆盖提示，`-f` 强制。
+
+**mv** source... directory ：多源复制到目录 `directory` 下。
+
+**rm** [-i] [-R] [-f] file... **(remove)** ：移除文件，`-i` 为提示，`-R` 递归移除，`-f` 强制。
+
+**cat** [-n] file **(concatenate)** ：连接文件 `file` 并打印到标准输出设备上，`-n` 为行编号。
+
+**more** file ：类似 cat ，以分页形式打印 `file`，不能向前翻页。
+
+**less** [-f] [+F] file ：以分页形式查看 `file` ，可向前向后翻页。`-f` 强制打开，`+F` 行为类似 `tail -f` ，但可中断，按 `F` 继续。
+
+**head** [-n +k | -n -k] file ：默认输出 `file` 的前十行，`-n +k` 输出前 `k` 行，`-n -k` 输出文件头至倒数第 `k` 行的内容。
+
+**tail** [-n +k | -n -k] [-f] file ：默认输出 `file` 的末十行，`-n -k` 输出末 `k` 行，`-n +k` 输出第 `k` 行至文件末尾的内容，`-f` 动态输出文件末尾增长的内容。
+
+**touch** [-c] [-a] [-m] [-t [[CC]YY]MMDDmm[.ss]] file... ：可用于创建新文件 `file` ，`-c` 强制不创建。文件存在则修改时间戳。`-a` 修改 access time ，`-m` 修改 modify time ，change time 修改为当前系统时间 ，`-t` 指定修改为某个时间戳。
+
+**stat** file **(status)** ：查看 `file` 的元数据信息（ inode 信息）。
+
+**ln** [-s] target link_name **(link)** ：为 `target` 建立链接 `link_name` ，默认为硬链接，`-s` 表示符号链接（软链接）。
+
+### 权限管理
+
+**chmod** [-R] [-v] abc file... ：修改 `file` 权限，`abc` 为八进制数，分别代表 ugo 的权限，`-R` 递归作用，`-v` 打印变更信息。
+
+**chmod** [-R] [-v] [ugoa]\[+-=]\[rwx] file...  **(change mode)**  ：修改 `file` 权限，`ugoa` 代表 user ，group ，other 和 all 。 
+
+**chgrp** [-R] [-v] group file... **(change group)** ：修改 `file` 所属组为 `group` ，`-R` 递归作用，`-v` 打印变更信息。 
+
+**chown** [-R] [-v] [user[:group]] file... **(change owner)** ：修改 `file` 所有者为 `user` ，所属组为 `group` 。
+
+
+
+### 文件压缩
+
+
+
+### 文件检索
+
+
+
+### 磁盘管理
+

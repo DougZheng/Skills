@@ -54,6 +54,6 @@ git stash list // 查看隐藏列表
 git stash pop // 恢复并从隐藏列表中删除
 git stash apply stash@{0} // 恢复指定的stash
 git stash drop stash@{0} // 从隐藏列表中删除
-git cherry-pick <commit> // 复制一个特定提交到当前分支
-git cherry-pick L^..R // 复制L..R的所有提到当前分支
+git cherry-pick <commit> // 复制一个特定提交到当前分支  
+git cherry-pick L^..R // 复制L..R的所有提到当前分支 
 ```
