@@ -358,7 +358,7 @@ term **--help** ：查看命令的具体用法。
 
 ### 快捷命令
 
-**Tab** ：自动补全参数。
+**Tab** ：自动补全参数，若有多选项则按两次 `tab` 后出现选项。
 
 **$\uparrow\downarrow$** ：切换上/下次命令。
 
@@ -389,6 +389,16 @@ term **--help** ：查看命令的具体用法。
 **!n** ：执行编号为 n 的命令。
 
 **ctrl + a, #, enter** ：注释该行命令并执行，可以在历史命令找到。
+
+**{ }** ：路径展开，如  `/tmp/{x/{a,b},y,z}`展开为 `/tmp/x/a,/tmp/x/b,/tmp/y,/tmp/z` 。
+
+**\*** ：匹配任意数量的字符，如 `.*` 匹配任意后缀。
+
+**?** ：匹配单个字符。
+
+**[ ]** ：匹配指定范围内的任意单个字符，如 `[a-zA-Z], [0-9], [ax19]` 等。
+
+**[^ ]** ：匹配除指定范围的任意单个字符，如 `[^a-zA-z], [^02468abc]` 等。
 
 ### 目录切换
 
@@ -454,7 +464,7 @@ term **--help** ：查看命令的具体用法。
 
 **ln** [-s] target link_name **(link)** ：为 `target` 建立链接 `link_name` ，默认为硬链接，`-s` 表示符号链接（软链接）。
 
-### 权限管理
+### 权限控制
 
 **chmod** [-R] [-v] abc file... ：修改 `file` 权限，`abc` 为八进制数，分别代表 ugo 的权限，`-R` 递归作用，`-v` 打印变更信息。
 
@@ -464,15 +474,50 @@ term **--help** ：查看命令的具体用法。
 
 **chown** [-R] [-v] [user[:group]] file... **(change owner)** ：修改 `file` 所有者为 `user` ，所属组为 `group` 。
 
-
-
 ### 文件压缩
 
-
+| 文件格式   | 命令                                     | 说明                                                         |
+| ---------- | ---------------------------------------- | ------------------------------------------------------------ |
+| `.tar`     | `tar -cvf test.tar file...`              | `-c` ，打包，将 `file` 打包成 `test.tar`                     |
+| `.tar`     | `tar -xvf test.tar [file...] [-C path]`  | `-x` ，解包，`file...` 解包部分文件，`-C path` 解包到指定目录 |
+| `.tar`     | `tar -tvf test.tar`                      | `-t` ，查看 `test.tar` 内的文件                              |
+| `.gz`      | `gzip -kv file...`                       | 压缩 `file...` 为 `.gz` 格式，不能压缩目录，`-k` 保留原文件  |
+| `.gz`      | `gunzip -kv file...`                     | 解压 `.gz` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
+| `.bz2`     | `bzip2 -kv file...`                      | 压缩 `file...` 为 `.bz2` 格式，不能压缩目录，`-k` 保留原文件 |
+| `.bz2`     | `bunzip2 -kv file...`                    | 解压 `.bz2` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
+| `.tar.gz`  | `tar -gcvf test.tar file...`             | `-c` 打包，`-g` 压缩为 `.gz` 格式                            |
+| `.tar.gz`  | `tar -gxvf test.tar [file...] [-C path]` | `-x` 解包，`-g` 解压缩 `.gz` 格式                            |
+| `.tar.bz2` | `tar -jcvf test.tar file...`             | `-c` 打包，`-j` 压缩为 `.bz2` 格式                           |
+| `.tar.bz2` | `tar -jxvf test.tar [file...] [-C path]` | `-x` 解包，`-j` 解压缩 `.bz2` 格式                           |
 
 ### 文件检索
 
 
 
+### 远程登录
+
+**ssh** ：mark（服务器好了再来）。
+
 ### 磁盘管理
 
+**df** [-h] [-i] [-T] **(disk free)** ：查看文件系统磁盘可用空间，`-h` 以人易阅读的形式显示，`-i` 用 inode 数量显示，`-T` 显示文件系统类型。
+
+**du** [-h] [-s] file **(disk usage)** ：查看 `file` 使用空间情况，`-h` 以人易阅读的形式显示，`-s` 对每个子目录列出总量。
+
+**fdisk** [-l] ：列出所有分区。（识别 u 盘）
+
+**mount** source directory ：将 `source` 挂载到 `directory` 下。如 `mount /dev/sdb /mnt/usb` 。
+
+**umount** directory **(unmount)** ：卸载 directory ，如 `umount /mnt/usb` 。
+
+### 网络配置
+
+**ping** [-c count] dest ：发送 ICMP 报文到 `dest` ，检查网络连通性， `-c count` 指定发送 `count` 个。
+
+**tracepath** dest ：追踪到 `dest` 的每一跳路由。
+
+**mtr** dest ：`ping` 和 `tracepath` 命令的整合。
+
+**ip** ：mark（看完计网再来）。
+
+**dig** ：mark。
