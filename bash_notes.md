@@ -556,6 +556,8 @@ tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fixed grep�
 
 **mtr** dest ：`ping` 和 `tracepath` 命令的整合。
 
+**host** hostname ：解析域名 `hostname` 。
+
 **ip** ：mark（看完计网再来）。
 
 **dig** ：mark。
