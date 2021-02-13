@@ -402,6 +402,10 @@ term **--help** ：查看命令的具体用法。
 
 ### 目录切换
 
+**ls** [-a] [-l] [dir] **(list)** ：列出 `dir` 目录下的所有文件，默认为 . ，`-a` 列出包括隐藏文件和 . 及 .. ，`-l` 以长格式列出具体信息。
+
+**pwd (print working directory)** ：打印当前目录路径。
+
 **cd** [dir] **(change directory)**：切换到 `dir` ，`~` 为 home 目录（`~/.bashrc` 访问 home 目录下文件），`-` 为上一次目录。
 
 **dirs** [-v] [-c] **(directories)**：显示目录栈，栈顶是当前目录，`-v` 按行显示并带编号，`-c` 清空栈。
@@ -436,10 +440,6 @@ term **--help** ：查看命令的具体用法。
 
 ### 文件管理
 
-**ls** [-a] [-l] [dir] **(list)** ：列出 `dir` 目录下的所有文件，默认为 . ，`-a` 列出包括隐藏文件和 . 及 .. ，`-l` 以长格式列出具体信息。
-
-**pwd (print working directory)** ：打印当前目录路径。
-
 **mkdir** [-p] [-v] dir **(make directory)** ：创建目录 `dir` ，`-p` 自动创建所需父目录，`-v` 打印创建信息。
 
 **rmdir** [-p] [-v] dir **(remove directory)** ：移除空目录 `dir` ，`-p` 自动移除空的父目录，`-v` 打印移除信息。
@@ -468,9 +468,11 @@ term **--help** ：查看命令的具体用法。
 
 **stat** file **(status)** ：查看 `file` 的元数据信息（ inode 信息）。
 
+**file**  file... ：查看 `file` 的类型。
+
 **ln** [-s] target link_name **(link)** ：为 `target` 建立链接 `link_name` ，默认为硬链接，`-s` 表示符号链接（软链接）。
 
-**find** ：mark（有空再来）。
+**find** file [-name "pattern"] ：查找 `file` 中的文件，`-name "pattern"` 查找所有文件名符合 `pattern` 的文件。
 
 ### 权限控制
 
@@ -500,7 +502,17 @@ term **--help** ：查看命令的具体用法。
 
 ### 文本处理
 
-**egrep** [option] pattern file... **(extend grep)**：查找 `file...` 中符合 `pattern` 的字符串。
+**wc** [-l] [-w] [-c] [-m] file... **(word count)** ：统计 `file` 行数、词数、字节数，`-l` 行数，`-w` 词数，`-c` 字节数，`-m` 字符数。
+
+**sort** [-r] [n] [-u] [-o file] file... ：对 `file` 的行按字典序排序并输出，`-r` 逆序，`-n` 按数值排序，`-u` 去重，`-o file` 结果存到 `file` 。
+
+**uniq** [-d] [-u] file... **(unique)** ：对 `file` 的相邻行去重并输出，`-d` 仅打印重复的行，`-u` 仅打印不重复的行。
+
+**cut** [-b -n] [-c] [-d 'char' -f] N file... ：对 `file` 进行列切割，`-b -n` 按字节，`-c` 按字符，`-d 'char' -f` 按 `char` 分隔，`N` 指示列。
+
+**paste** [-d 'char'] file... ：对 `file` 按列合并，`-d 'char'` 按 `char` 分隔，`-` 可用指代标准输入。
+
+**egrep** [option] pattern file... **(extended grep)**：查找 `file...` 中符合 `pattern` 的字符串。
 
 | 选项   | 说明                                             |
 | ------ | ------------------------------------------------ |
@@ -514,7 +526,11 @@ term **--help** ：查看命令的具体用法。
 | `-B n` | 打印匹配的字符串所在行及前 `n` 行（before）      |
 | `-C n` | 打印匹配的字符串所在行及前后各 `n` 行（context） |
 
-tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fast grep）**提高查找速度。
+tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fixed grep）**提高查找速度。
+
+**awk** ：
+
+**sed** **(stream editor)** ：
 
 ### 远程登录
 
@@ -543,3 +559,16 @@ tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fast grep�
 **ip** ：mark（看完计网再来）。
 
 **dig** ：mark。
+
+### 实用命令
+
+command | **xargs** [option] command **(extended arguments)** ：传递参数，用于组合多个命令，将前面的管道输出转成命令参数。
+
+`xargs` 默认执行 `echo` ，但会过滤换行和空白，转换后参数以空格分隔，`-0` 将 NULL 作为分隔符。
+
+`-nN` 每行使用至多 `N` 个参数，`-p` 用于交互，`-I` 指定一个替换字符串 `{}` ，用于多参数指示替换位置，此时 `{}` 被参数替换。
+
+例： `ls *.jpg | xargs -p -I {} cp {} /data/images` 。 
+
+**uptime** [-s] [-p] ：查看系统负载情况，`-s` 打印系统启动时间，`-p` 以易阅读形式打印系统运行时间。
+
