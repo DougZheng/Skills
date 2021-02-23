@@ -20,7 +20,7 @@ git status // 查看状态
 git diff <path> // 查看文件内容变更情况
 git log [--pretty=oneline] // 查看版本
 git log [--oneline] [--graph] // 简化
-git reset -hard <commit> // 回退到指定版本
+git reset --hard <commit> // 回退到指定版本
 git revert -n <commit> // 反做（撤销）某版本
 git reflog // git历史命令记录
 ```

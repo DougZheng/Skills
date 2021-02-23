@@ -6,7 +6,7 @@
 
 **A** ：Address 。
 
-**MX** ：Mail eXchange 。
+**MX** ：Mail eXchange 。  
 
 ### 第二章 用电信号传输 TPC/IP 数据——协议栈和网卡
 

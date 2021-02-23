@@ -352,7 +352,7 @@ command1 | command2 [ | commandN ...]
 
 **help** [-d] term：查看 shell 内置命令的使用，`-d` 简要显示用途。
 
-**type** term ：查看命令类型，可执行文件、shell 内置命令或别名。
+**type** [-a] term ：查看命令类型，可执行文件、shell 内置命令或别名，`-a` 查看全部。
 
 term **--help** ：查看命令的具体用法。
 
@@ -495,8 +495,8 @@ term **--help** ：查看命令的具体用法。
 | `.gz`      | `gunzip -kv file...`                     | 解压 `.gz` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
 | `.bz2`     | `bzip2 -kv file...`                      | 压缩 `file...` 为 `.bz2` 格式，不能压缩目录，`-k` 保留原文件 |
 | `.bz2`     | `bunzip2 -kv file...`                    | 解压 `.bz2` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
-| `.tar.gz`  | `tar -gcvf test.tar file...`             | `-c` 打包，`-g` 压缩为 `.gz` 格式                            |
-| `.tar.gz`  | `tar -gxvf test.tar [file...] [-C path]` | `-x` 解包，`-g` 解压缩 `.gz` 格式                            |
+| `.tar.gz`  | `tar -zcvf test.tar file...`             | `-c` 打包，`-z` 压缩为 `.gz` 格式                            |
+| `.tar.gz`  | `tar -zxvf test.tar [file...] [-C path]` | `-x` 解包，`-z` 解压缩 `.gz` 格式                            |
 | `.tar.bz2` | `tar -jcvf test.tar file...`             | `-c` 打包，`-j` 压缩为 `.bz2` 格式                           |
 | `.tar.bz2` | `tar -jxvf test.tar [file...] [-C path]` | `-x` 解包，`-j` 解压缩 `.bz2` 格式                           |
 
@@ -574,3 +574,4 @@ command | **xargs** [option] command **(extended arguments)** ：传递参数，
 
 **uptime** [-s] [-p] ：查看系统负载情况，`-s` 打印系统启动时间，`-p` 以易阅读形式打印系统运行时间。
 
+**/usr/bin/time** [-v] command ：查看 `command` 执行时间，`-v` 显示详细信息。

@@ -1,4 +1,18 @@
-![classic](https://www.runoob.com/wp-content/uploads/2015/10/classic1.gif)
+![vi-vim-graphical-cheat-sheet](./images/vi-vim-graphical-cheat-sheet.gif)
+
+![vi-vim-tutorial-1](./images/vi-vim-tutorial-1.gif)
+
+![vi-vim-tutorial-2](./images/vi-vim-tutorial-2.gif)
+
+![vi-vim-tutorial-3](./images/vi-vim-tutorial-3.gif)
+
+![vi-vim-tutorial-4](./images/vi-vim-tutorial-4.gif)
+
+![vi-vim-tutorial-5](./images/vi-vim-tutorial-5.gif)
+
+![vi-vim-tutorial-6](./images/vi-vim-tutorial-6.gif)
+
+![vi-vim-tutorial-7](./images/vi-vim-tutorial-7.gif)
 
 # Learn-Vim
 
@@ -62,7 +76,7 @@
 
 **Verbs (Operators)** ：`y` `d` `c` 等等。
 
-**More Nouns (Text Objects)** ：`i + object` 或 `o + object` ，详见 `:help text object` 。
+**More Nouns (Text Objects)** ：`i + object` 或 `a + object` ，详见 `:help text object` 。
 
 **Filter Operator (!)** ：可用来使用外部命令。
 
@@ -73,6 +87,8 @@
 **w|W  b|B  e|E** ：`w` 移动到下一个 word 的开头，`b` 移动到上一个 word 的开头，`e` 在 word 的结尾移动。大写 `WBE` 在 WORD 移动。
 
 **0  ^  $  g_** ：`0` 移动到本行第一个字符，`^` 到本行第一个非空白字符，`$` 到本行最后一个字符，`g_` 到本行最后一个非空白字符。
+
+**ctrl + f|b** ：`ctrl+f` 向下翻页，`ctrl+b` 向上翻页。
 
 **f|F**{char} [;|,]... ：`f{char}` 查找本行下一个出现的 `char` ，`F` 反向查找，`;` 正向继续查找，`,` 反向继续查找。
 
@@ -128,39 +144,37 @@
 
 ## Ch12. Search and Substitute
 
-**/\c** ：`\c` 搜索时忽略大小写，`\C` 不忽略大小写。
+**:/\c** ：`\c` 搜索时不区分大小写，`\C` 区分大小写。搜索支持正则表达式，转义字符 `\` 。
 
-
+**:%s**/{old-pattern}/{new-pattern}/[g|c|i|I]... ：替换每行第一个 `old-pattern` 为 `new-pattern` ，`c` 替换前询问，`i` 不区分大小写，`I` 区分，`g` 全部替换。
 
 ## Ch13. The Global Command
 
-
+**:g**/{pattern}/{command} ：对所有匹配 `pattern` 的行执行 `command` ，可在 `g` 前加范围限定。
 
 ## Ch14. External Commands
 
+**:!**{cmd} ：执行外部命令 `cmd` 。
 
+**:r **!{cmd} ：读取外部命令 `cmd` 的执行结果。
+
+**:w **!{cmd} ：当前缓冲区作为外部命令 `cmd` 的输入。
 
 ## Ch15. Command-line Mode
 
-
+**ctrl + [** ：回到普通模式。
 
 ## Ch16. Tags
 
-
-
 ## Ch17. Fold
-
-
 
 ## Ch18. Git
 
-
-
 ## Ch19. Compile
 
-
-
 ## Ch20. Views, Sessions and Viminfo
+
+## Ch21. Vimrc
 
 
 
