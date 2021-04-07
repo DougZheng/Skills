@@ -416,7 +416,7 @@ term **--help** ：查看命令的具体用法。
 
 ### 进程管理
 
-**ps** [-l] **(processes)** ：打印进程状态，`-l` 打印长格式。
+**ps** [-e] [-f] **(processes)** ：打印进程状态，`-e` 打印所有进程（包括其他终端），`-f` 打印全格式。
 
 **pstree** [-p] **(processes tree)** ：打印进程树状图，`-p` 打印 pid 。
 
@@ -437,6 +437,8 @@ term **--help** ：查看命令的具体用法。
 **bg** n **(background)** ：让 jobid 为 n 的进程在后台执行。
 
 **kill** [-9 | -19 | -l] [%n | pid] ：正常停止一个进程，`-9` 强制杀死，`-19` 挂起进程，`-l` 查看支持的信号，`%n` 指代 jobid 为 n 的进程。
+
+**top** ：动态显示进程 cpu 、内存等使用情况，`P` 按 cpu 占比降序排列。
 
 ### 文件管理
 
@@ -534,7 +536,7 @@ tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fixed grep�
 
 ### 远程登录
 
-**ssh** ：mark（服务器好了再来）。
+**ssh** [-l login_name] destination ：远程登录，`-l` 指定登录用户名 `login_name` 。
 
 ### 磁盘管理
 
@@ -548,7 +550,7 @@ tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fixed grep�
 
 **umount** directory **(unmount)** ：卸载 directory ，如 `umount /mnt/usb` 。
 
-### 网络配置
+### 网络相关
 
 **ping** [-c count] dest ：发送 ICMP 报文到 `dest` ，检查网络连通性， `-c count` 指定发送 `count` 个。
 
@@ -558,9 +560,13 @@ tips ：若 `pattern` 不使用正则表达式，可用 `fgrep` **（fixed grep�
 
 **host** hostname ：解析域名 `hostname` 。
 
+**netstat** [-a] [-t] [-u] ：查看各端口网络连接情况，`-a` 查看所有连接（包括监听），`-t` 显示 tcp 连接，`-u` 显示 udp 连接。
+
 **ip** ：mark（看完计网再来）。
 
 **dig** ：mark。
+
+**tcpdump**
 
 ### 实用命令
 
@@ -575,3 +581,54 @@ command | **xargs** [option] command **(extended arguments)** ：传递参数，
 **uptime** [-s] [-p] ：查看系统负载情况，`-s` 打印系统启动时间，`-p` 以易阅读形式打印系统运行时间。
 
 **/usr/bin/time** [-v] command ：查看 `command` 执行时间，`-v` 显示详细信息。
+
+**systemctl** [start|stop|restart|status] {services} ：启动、停止、重启、查看服务。
+
+### vsftpd 配置
+
+**服务器端**
+
+安装 vsftpd `apt-get install vsftpd` 。 
+
+出现错误 Unable to locate package vsftpd，`apt-get update` 后再尝试 `apt-get install vsftpd` 。
+
+安装完成后启动 vsftpd 服务 `systemctl start vsftpd` 。
+
+新建用户目录 `mkdir/home/uftp` 。
+
+新建用户 uftp 作为 vsftpd 访问用户 `useradd -d /home/uftp -s /bin/bash uftp` 。
+
+设置用户 uftp 密码 `passwd uftp` 。
+
+修改用户目录所属者和所属组 `chown uftp:uftp /home/uftp` 。
+
+修改用户目录权限为 `chmod 555 /home/uftp` （无写权限）。
+
+新建文件 /etc/vsftpd.user_list 存放可访问 ftp 的用户 `vim /etc/vsftpd.user_list` 并添加内容 uftp 。
+
+打开 vsftpd 配置文件 /etc/vsftpd.conf `vim /etc/vsftpd.conf` ，修改以下内容（有则修改，无则新增）：
+
+```
+listen=YES
+listen_port=21
+listen_ipv6=NO
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=022
+connect_from_port_20=YES
+chroot_local_user=YES # 限定用户不能访问上层目录，用户根目录不能有写权限
+userlist_file=/etc/vsftpd.user_list
+userlist_enable=YES
+userlist_deny=NO
+```
+
+重启 vsftpd 服务 `systemctl restart vsftpd` 。
+
+**客户端**
+
+进入 ftp 命令 `ftp` 。
+
+连接服务器 `open` 。
+
+上传数据 `send` 。

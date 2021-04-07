@@ -1,36 +1,9 @@
 # 计算机网络
 
-## 网络是怎样连接成的
+## TCP/IP 详解卷一
 
-### 第一章 浏览器生成消息—— Web 服务器
+### TCP
 
-**A** ：Address 。
+![image-20210308102857516](C:\Users\Doug\AppData\Roaming\Typora\typora-user-images\image-20210308102857516.png)
 
-**MX** ：Mail eXchange 。  
-
-### 第二章 用电信号传输 TPC/IP 数据——协议栈和网卡
-
-
-
-### 第三章 从网线到网络设备——集线器、交换机和路由器
-
-
-
-### 第四章 通过接入网进入互联网内部——接入网和网络运营商
-
-
-
-### 第五章 服务器端的局域网中有什么玄机——防火墙和网络运营商
-
-
-
-### 第六章 请求到达 Web 服务器，响应返回浏览器
-
-
-
-## 图解TCP/IP
-
-
-
-## 图解HTTP
-
+TIME_WAIT 状态也称为 2MSL（Maximum Segment Lifetime） 等待状态，当 TCP 执行一个主动关闭并发回最后一个 ACK，该连接必须在 TIME_WAIT 状态停留 2倍 MSL 的时间，这样可以让 TCP 再次发送最后的 ACK 以防止这个 ACK 丢失。
