@@ -34,7 +34,7 @@
 
 换算关系：1 wpm = 5 kpm 。
 
-## Reference
+## 参考
 
 - <https://www.typingclub.com/>
 
