@@ -632,3 +632,31 @@ userlist_deny=NO
 连接服务器 `open` 。
 
 上传数据 `send` 。
+
+## zsh 使用
+
+**zsh 安装**
+
+`yum install zsh` 安装 zsh 。
+
+`cat /etc/shells` 查看已安装的 shell 。
+
+`chsh -s /bin/zsh` 切换并设置默认 shell 。
+
+**on-my-zsh 安装**
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+**修改主题**
+
+`ls ~/.oh-my-zsh/themes/` 查看可用主题。
+
+`vim ~/.zshrc` 修改 `ZSH_THEME` 字段值更换主题，记得 `source ~/.zshrc` 使变更生效。
+
+**参考**
+
+https://www.cnblogs.com/jie-fang/p/13437335.html
+
+有空继续捣鼓。
