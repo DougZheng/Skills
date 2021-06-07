@@ -8,6 +8,37 @@
 
 文末的**常用场景**将随着本人日常使用进行持续更新，敬请期待。
 
+## 安装指引
+
+由于 centos 使用 `yum install git` 安装的默认版本太旧，自行安装新版 git 。 
+
+首先安装依赖：
+
+```
+yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
+```
+
+然后，可寻找合适的 git 版本：https://mirrors.edge.kernel.org/pub/software/scm/git/ 。
+
+```
+cd /usr/local
+wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.8.6.tar.gz
+tar -zxvf git-2.8.6.tar.gz
+cd git-2.8.6
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+```
+
+接下来，配置环境变量，先  `vim /etc/profile`  然后在下面添加：
+
+```
+export PATH=/usr/local/git/bin:$PATH
+```
+
+再 `source /etc/profile` 使环境变量生效。
+
+最后，使用 `git --version` 查看版本。
+
 ## 配置信息
 
 **查看配置**
