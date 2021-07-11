@@ -44,9 +44,9 @@
 
 **:wqa[ll]**[!] ：保存并退出所有缓冲区，`!` 强制执行。
 
-**:split** file ：打开 `file` 并水平分割窗口。
+**:sp[lit]** file ：打开 `file` 并水平分割窗口。
 
-**:vsplit** file ：打开 `file` 并竖直分割窗口。
+**:vs[plit]** file ：打开 `file` 并竖直分割窗口。
 
 **ctrl + w** h|j|k|l ：在窗口间移动。
 
@@ -176,7 +176,7 @@
 
 ## Ch21. Vimrc
 
+## Reference
 
-
-
-
+- <https://github.com/iggredible/Learn-Vim>
+- <https://vim.fandom.com/wiki/Did_you_know>
