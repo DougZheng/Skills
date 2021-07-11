@@ -275,7 +275,9 @@ continue 3 # 继续三层循环
 ```shell
 # 类似for，但是产生交互选择
 select i in "y" "n"
+do
 	echo $i
+done
 ```
 
 ### 函数
@@ -488,19 +490,19 @@ term **--help** ：查看命令的具体用法。
 
 ### 文件压缩
 
-| 文件格式   | 命令                                     | 说明                                                         |
-| ---------- | ---------------------------------------- | ------------------------------------------------------------ |
-| `.tar`     | `tar -cvf test.tar file...`              | `-c` ，打包，将 `file` 打包成 `test.tar`                     |
-| `.tar`     | `tar -xvf test.tar [file...] [-C path]`  | `-x` ，解包，`file...` 解包部分文件，`-C path` 解包到指定目录 |
-| `.tar`     | `tar -tvf test.tar`                      | `-t` ，查看 `test.tar` 内的文件                              |
-| `.gz`      | `gzip -kv file...`                       | 压缩 `file...` 为 `.gz` 格式，不能压缩目录，`-k` 保留原文件  |
-| `.gz`      | `gunzip -kv file...`                     | 解压 `.gz` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
-| `.bz2`     | `bzip2 -kv file...`                      | 压缩 `file...` 为 `.bz2` 格式，不能压缩目录，`-k` 保留原文件 |
-| `.bz2`     | `bunzip2 -kv file...`                    | 解压 `.bz2` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
-| `.tar.gz`  | `tar -zcvf test.tar file...`             | `-c` 打包，`-z` 压缩为 `.gz` 格式                            |
-| `.tar.gz`  | `tar -zxvf test.tar [file...] [-C path]` | `-x` 解包，`-z` 解压缩 `.gz` 格式                            |
-| `.tar.bz2` | `tar -jcvf test.tar file...`             | `-c` 打包，`-j` 压缩为 `.bz2` 格式                           |
-| `.tar.bz2` | `tar -jxvf test.tar [file...] [-C path]` | `-x` 解包，`-j` 解压缩 `.bz2` 格式                           |
+| 文件格式   | 命令                                         | 说明                                                         |
+| ---------- | -------------------------------------------- | ------------------------------------------------------------ |
+| `.tar`     | `tar -cvf test.tar file...`                  | `-c` ，打包，将 `file` 打包成 `test.tar`                     |
+| `.tar`     | `tar -xvf test.tar [file...] [-C path]`      | `-x` ，解包，`file...` 解包部分文件，`-C path` 解包到指定目录 |
+| `.tar`     | `tar -tvf test.tar`                          | `-t` ，查看 `test.tar` 内的文件                              |
+| `.gz`      | `gzip -kv file...`                           | 压缩 `file...` 为 `.gz` 格式，不能压缩目录，`-k` 保留原文件  |
+| `.gz`      | `gunzip -kv file...`                         | 解压 `.gz` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
+| `.bz2`     | `bzip2 -kv file...`                          | 压缩 `file...` 为 `.bz2` 格式，不能压缩目录，`-k` 保留原文件 |
+| `.bz2`     | `bunzip2 -kv file...`                        | 解压 `.bz2` 格式的 `file...` ，`-k` 保留原文件，`-v` 打印详细信息 |
+| `.tar.gz`  | `tar -zcvf test.tar.gz file...`              | `-c` 打包，`-z` 压缩为 `.gz` 格式                            |
+| `.tar.gz`  | `tar -zxvf test.tar.gz [file...] [-C path]`  | `-x` 解包，`-z` 解压缩 `.gz` 格式                            |
+| `.tar.bz2` | `tar -jcvf test.tar.bz2 file...`             | `-c` 打包，`-j` 压缩为 `.bz2` 格式                           |
+| `.tar.bz2` | `tar -jxvf test.tar.bz2 [file...] [-C path]` | `-x` 解包，`-j` 解压缩 `.bz2` 格式                           |
 
 ### 文本处理
 
@@ -508,7 +510,7 @@ term **--help** ：查看命令的具体用法。
 
 **sort** [-r] [n] [-u] [-o file] file... ：对 `file` 的行按字典序排序并输出，`-r` 逆序，`-n` 按数值排序，`-u` 去重，`-o file` 结果存到 `file` 。
 
-**uniq** [-d] [-u] file... **(unique)** ：对 `file` 的相邻行去重并输出，`-d` 仅打印重复的行，`-u` 仅打印不重复的行。
+**uniq** [-d] [-u] [-c] file... **(unique)** ：对 `file` 的相邻行去重并输出，`-d` 仅打印重复的行，`-u` 仅打印不重复的行，`-c` 打印重复次数。
 
 **cut** [-b -n] [-c] [-d 'char' -f] N file... ：对 `file` 进行列切割，`-b -n` 按字节，`-c` 按字符，`-d 'char' -f` 按 `char` 分隔，`N` 指示列。
 
